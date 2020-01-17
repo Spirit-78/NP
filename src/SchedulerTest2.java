@@ -81,7 +81,7 @@ class Scheduler2<T> extends Timestamp<T>{
 }
 
 
-public class SchedulerTest {
+public class SchedulerTest2 {
 
     static final LocalDateTime TIME = LocalDateTime.of(2016, 10, 25, 10, 15);
 

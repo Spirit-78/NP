@@ -75,15 +75,17 @@ class IntegerList{
         check(idx);
         int temp = lista.get(idx);
         lista.remove(idx);
-        lista.add((k + idx)%lista.size(),temp);
+        lista.add((k + idx)%(lista.size()+1),temp);
 
     }
         public void shiftLeft(int idx, int k) throws ArrayIndexOutOfBoundsException {
             check(idx);
+            int helper2 = 0;
+            if((idx - k)%lista.size() < 0)
+                helper2 = lista.size();
             int temp = lista.get(idx);
-            lista.remove(temp);
-            lista.add((Math.abs(idx - k + lista.size())%lista.size()),temp);
-
+            lista.remove(idx);
+            lista.add((idx - k)%lista.size() + helper2,temp);
 
         }
         public IntegerList addValue(int val){

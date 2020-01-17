@@ -53,9 +53,11 @@ final class IntegerArray {
         IntegerArray other = (IntegerArray) obj;
         if(this.a.length!=other.a.length)
             return false;
-        for(int i=0;i<this.a.length;i++)
-            if(this.a[i]!=other.a[i])
-                return false;
+//        for(int i=0;i<this.a.length;i++)
+//            if(this.a[i]!=other.a[i])
+//                return false;
+        if(!Arrays.equals(this.a,other.a))
+             return false;
         return true;    // !! heeere finish
     }
 }
@@ -64,8 +66,6 @@ class ArrayReader{
         Scanner sc = new Scanner(new InputStreamReader(input));
         int n = sc.nextInt();
         Integer[] array = new Integer[n];
-//        for(int i=0;i<n;i++)
-//            array[i] = sc.nextInt();
         IntStream.range(0,n).map(i ->  sc.nextInt()).boxed().collect(Collectors.toList()).toArray(array);
         sc.close();
         return new IntegerArray(array);

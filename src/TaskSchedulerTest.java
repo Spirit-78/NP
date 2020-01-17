@@ -36,7 +36,7 @@ public class TaskSchedulerTest {
 }
 
 class TaskRunner<T extends Task> {
-public void run(TaskScheduler<T> scheduler, T[] tasks) {
+void run(TaskScheduler<T> scheduler, T[] tasks) {
         List<T> order = scheduler.schedule(tasks);
         order.forEach(System.out::println);
         }
@@ -44,17 +44,17 @@ public void run(TaskScheduler<T> scheduler, T[] tasks) {
 
 interface TaskScheduler<T extends Task> {
 
-    public List<T> schedule(T[] tasks);
+    List<T> schedule(T[] tasks);
 }
 
 interface Task extends Comparable<Task>{
-    public int getOrder();
+    int getOrder();
 }
 
 class PriorityTask implements Task {
     private final int priority;
 
-    public PriorityTask(int priority) {
+    PriorityTask(int priority) {
         this.priority = priority;
     }
     @Override
@@ -74,7 +74,7 @@ class PriorityTask implements Task {
 class TimedTask implements Task {
     private final int time;
 
-    public TimedTask(int time) {
+    TimedTask(int time) {
         this.time = time;
     }
     @Override
@@ -92,12 +92,12 @@ class TimedTask implements Task {
     }
 }
 class Schedulers {
-    public static <T extends Task> TaskScheduler<T> getOrdered() {
+    static <T extends Task> TaskScheduler<T> getOrdered() {
         // vashiot kod ovde (annonimous class)
         return tasks -> Arrays.stream(tasks).sorted().collect(Collectors.toList());
     }
 
-    public static <T extends Task> TaskScheduler<T> getFiltered(int order) {
+    static <T extends Task> TaskScheduler<T> getFiltered(int order) {
         return tasks -> Arrays.stream(tasks).filter(item -> item.getOrder() < order).collect(Collectors.toList());
 
     }

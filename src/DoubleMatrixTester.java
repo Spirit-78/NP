@@ -23,7 +23,6 @@ class InvalidColumnNumberException extends Exception{
 
 final class DoubleMatrix{
     private final double a[][];
-    //private final int m,n;
     public DoubleMatrix(double a[], int m, int n) throws InsufficientElementsException {
         this.a = new double[m][n];
         if(a.length < m * n)
@@ -40,7 +39,6 @@ final class DoubleMatrix{
         for(int i=a.length - m*n;i<a.length;i++)
             tmp[i - (a.length - m*n)] = a[i];
         IntStream.range(0,m).forEach(j -> this.a[j] = Arrays.copyOfRange(tmp, j*n, n+n*j));
-       // IntStream.range(0,m).
     }
     String getDimensions(){return "[" + this.a.length + " x " + this.a[0].length + "]";}
     int rows(){return this.a.length;}
@@ -73,8 +71,7 @@ final class DoubleMatrix{
         Arrays.stream(this.a).forEach(array -> {
             Arrays.stream(array).forEach(element -> sb.append(df.format(element) + "\t"));
             sb.replace(sb.length()-1, sb.length(),"\n");
-            //sb.append("\n");
-        }
+            }
         );
         sb.delete(sb.length()-1,sb.length());
         return sb.toString();
@@ -110,7 +107,7 @@ class MatrixReader{
         int m = Integer.parseInt(line[0]), n = Integer.parseInt(line[1]);
         Double [] array = new Double[m*n];
         IntStream.range(0,m*n).mapToDouble(i ->  in.nextDouble()).boxed().collect(Collectors.toList()).toArray(array);
-        input.close();
+        in.close(); input.close();
         return new DoubleMatrix(array,m,n);
     }
 }

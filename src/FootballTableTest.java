@@ -81,10 +81,10 @@ class FootballTable{
         });
     }
     public void printTable(){
-        List<Team> table = new ArrayList<>(this.matches.values());
         matches.values().stream()
                 .sorted(Comparator.comparing(Team::points)
-                        .thenComparing(Team::ratio).reversed().thenComparing(Team::getTeamName))
+                        .thenComparing(Team::ratio)
+                        .reversed().thenComparing(Team::getTeamName))
                 .forEach(team -> System.out.printf("%2d. %s\n", counterFunc(), team));
     }
     public int i = 1;
